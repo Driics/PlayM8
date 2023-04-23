@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="ds_pageIndicatorPrimary" format="color" />
+    <attr name="ds_iconSecondary" format="color" />
+    <attr name="ds_scrollable" format="boolean" />
+    <attr name="ds_animationDurationFactor" format="float" />
+    <attr name="ds_changeIndicatorsColor" format="boolean" />
+    <attr name="ds_activeIndicatorScale" format="float" />
+    <attr name="ds_itemCount" format="integer" />
+    <attr name="ds_indicatorStrokeSize" format="dimension" />
+    <attr name="ds_indicatorShape">
+        <enum name="rectangle" value="0" />
+        <enum name="oval" value="1" />
+    </attr>
+    <attr name="ds_indicatorShapeStyle">
+        <enum name="fill" value="0" />
+        <enum name="stroke" value="1" />
+    </attr>
+    <attr name="ds_indicatorShapeCornerRadius" format="dimension">
+        <enum name="max" value="-2" />
+        <enum name="none" value="-1" />
+    </attr>
+
+    <declare-styleable name="BasePageIndicator">
+        <attr name="ds_iconSecondary" />
+        <attr name="ds_activeIndicatorColor" format="color" />
+        <attr name="ds_activeIndicatorScale" />
+        <attr name="ds_indicatorColor" format="color" />
+        <attr name="ds_indicatorAnimationDampingRatio" format="float" />
+        <attr name="ds_indicatorAnimationStiffness" format="float" />
+        <attr name="ds_indicatorShape" />
+        <attr name="ds_indicatorShapeCornerRadius" />
+        <attr name="ds_indicatorShapeStyle" />
+        <attr name="ds_indicatorSizeHeight" format="dimension">
+            <enum name="same_size" value="-1" />
+        </attr>
+        <attr name="ds_indicatorSizeWidth" format="dimension">
+            <enum name="same_size" value="-1" />
+            <enum name="fill" value="-2" />
+        </attr>
+        <attr name="ds_indicatorSpacing" format="dimension">
+            <enum name="evenly" value="-1" />
+        </attr>
+        <attr name="android:layout_gravity" />
+        <attr name="ds_itemCount" />
+        <attr name="ds_indicatorStrokeSize" />
+        <attr name="ds_changeIndicatorsColor" />
+    </declare-styleable>
+
+    <declare-styleable name="StretchPageIndicator">
+        <attr name="ds_activeIndicatorScale" />
+        <attr name="ds_changeIndicatorsColor" />
+    </declare-styleable>
+
+    <declare-styleable name="ShapePageIndicator">
+        <attr name="ds_indicatorShape" />
+        <attr name="ds_indicatorShapeStyle" />
+        <attr name="ds_indicatorStrokeSize" />
+        <attr name="ds_indicatorShapeCornerRadius" />
+    </declare-styleable>
+</resources>

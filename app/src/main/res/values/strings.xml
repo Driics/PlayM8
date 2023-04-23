@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PlayM8</string>
+
+    <string name="next">Next</string>
+
+    <string name="onboarding_welcome_title">Team Up, Game On</string>
+    <string name="onboarding_welcome_desc">Whether you\'re a hardcore gamer or just looking for someone to play with, our app connects you with like-minded players.</string>
+</resources>

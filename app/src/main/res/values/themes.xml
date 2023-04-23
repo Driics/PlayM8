@@ -1,0 +1,48 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.PlayM8" parent="Theme.Material3.DynamicColors.DayNight">
+        <item name="fontFamily">@font/syne_medium</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorPrimaryVariant">@color/accent</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+
+        <item name="bottomSheetDialogTheme">@style/Theme.PlayM8.BottomSheetDialog</item>
+    </style>
+
+    <style name="Widget.DS.PageIndicator" parent="">
+        <item name="ds_activeIndicatorScale">3.5</item>
+        <item name="ds_changeIndicatorsColor">false</item>
+        <item name="ds_indicatorShape">rectangle</item>
+        <item name="ds_indicatorShapeCornerRadius">max</item>
+        <item name="ds_indicatorShapeStyle">fill</item>
+        <item name="ds_indicatorSizeHeight">@dimen/ds_page_indicator_height_small</item>
+        <item name="ds_indicatorSizeWidth">same_size</item>
+        <item name="ds_indicatorSpacing">@dimen/ds_page_indicator_height_spacing_xsmall</item>
+    </style>
+
+    <style name="PlayM8.Text.DefaultSmall" parent="">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="PlayM8.Text.Medium" parent="">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Theme.PlayM8.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetDialog</item>
+    </style>
+
+    <style name="BottomSheetDialog" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">@color/darker_gray</item>
+    </style>
+</resources>

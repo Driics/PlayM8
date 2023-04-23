@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="ds_page_indicator_height_small">4dp</dimen>
+    <dimen name="ds_page_indicator_height_spacing_xsmall">4dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>
