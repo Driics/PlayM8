@@ -8,16 +8,17 @@
     tools:context=".ui.OnboardingActivity">
 
     <FrameLayout
+        android:id="@+id/frame"
         style="@style/BottomSheetDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="150dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="32dp"
+            android:layout_gravity="bottom"
             android:orientation="vertical">
 
             <androidx.viewpager2.widget.ViewPager2

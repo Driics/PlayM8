@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.PlayM8" parent="Theme.Material3.DynamicColors.DayNight">
+    <style name="Theme.PlayM8" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="fontFamily">@font/syne_medium</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/accent</item>
@@ -29,11 +29,13 @@
     </style>
 
     <style name="PlayM8.Text.DefaultSmall" parent="">
+        <item name="android:fontFamily">@font/syne_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/gray</item>
     </style>
 
     <style name="PlayM8.Text.Medium" parent="">
+        <item name="android:fontFamily">@font/syne_medium</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
@@ -44,5 +46,6 @@
 
     <style name="BottomSheetDialog" parent="Widget.Material3.BottomSheet.Modal">
         <item name="backgroundTint">@color/darker_gray</item>
+        <item name="cornerRadius">24dp</item>
     </style>
 </resources>
