@@ -1,17 +1,19 @@
 package ru.driics.playm8.utils
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.View
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityManager
 import android.widget.Button
 import androidx.annotation.DrawableRes
 import ru.driics.playm8.MyApplication
-import ru.driics.playm8.utils.cache.Utils
+import ru.driics.playm8.utils.ViewUtils.toPx
 
 
 object AndroidUtils {
@@ -70,25 +72,84 @@ object AndroidUtils {
         MyApplication.applicationHandler!!.removeCallbacks(runnable)
     }
 
-    fun recycleBitmap(image: Bitmap) {
-        recycleBitmaps(listOf(image))
+    fun updateViewShow(view: View?, show: Boolean) {
+        updateViewShow(view, show, true, true)
     }
 
-    fun recycleBitmaps(bitmapToRecycle: List<Bitmap>) {
-        if (bitmapToRecycle.isNotEmpty()) {
-            runOnUIThread({
-                Utils.globalQueue.postRunnable {
-                    for (i in bitmapToRecycle.indices) {
-                        val bitmap = bitmapToRecycle[i]
-                        if (!bitmap.isRecycled) {
-                            try {
-                                bitmap.recycle()
-                            } catch (_: Exception) {
-                            }
-                        }
-                    }
+    fun updateViewShow(view: View?, show: Boolean, scale: Boolean, animated: Boolean) {
+        updateViewShow(view, show, scale, 0f, animated, null)
+    }
+
+    fun updateViewShow(
+        view: View?,
+        show: Boolean,
+        scale: Boolean,
+        animated: Boolean,
+        onDone: Runnable?
+    ) {
+        updateViewShow(view, show, scale, 0f, animated, onDone)
+    }
+
+    fun updateViewShow(
+        view: View?,
+        show: Boolean,
+        scale: Boolean,
+        translate: Float,
+        animated1: Boolean,
+        onDone: Runnable?
+    ) {
+        var animated = animated1
+        if (view == null) {
+            return
+        }
+        if (view.parent == null) {
+            animated = false
+        }
+        view.animate().setListener(null).cancel()
+        if (!animated) {
+            view.visibility = if (show) View.VISIBLE else View.GONE
+            view.tag = if (show) 1 else null
+            view.alpha = 1f
+            view.scaleX = if (scale && !show) 0f else 1f
+            view.scaleY = if (scale && !show) 0f else 1f
+            if (translate != 0f) {
+                view.translationY = (if (show) 0 else (-16).toPx * translate) as Float
+            }
+            onDone?.run()
+        } else if (show) {
+            if (view.visibility != View.VISIBLE) {
+                view.visibility = View.VISIBLE
+                view.alpha = 0f
+                view.scaleX = (if (scale) 0 else 1).toFloat()
+                view.scaleY = (if (scale) 0 else 1).toFloat()
+                if (translate != 0f) {
+                    view.translationY = (-16).toPx * translate
                 }
-            }, 36)
+            }
+            var animate = view.animate()
+            animate = animate.alpha(1f).scaleY(1f).scaleX(1f)
+                .setInterpolator(CubicBezierInterpolator.EASE_OUT_QUINT).setDuration(340)
+                .withEndAction(onDone)
+            if (translate != 0f) {
+                animate.translationY(0f)
+            }
+            animate.start()
+        } else {
+            var animate = view.animate()
+            animate = animate.alpha(0f).scaleY((if (scale) 0 else 1).toFloat())
+                .scaleX((if (scale) 0 else 1).toFloat())
+                .setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        super.onAnimationEnd(animation)
+                        view.visibility = View.GONE
+                    }
+                })
+                .setInterpolator(CubicBezierInterpolator.EASE_OUT_QUINT).setDuration(340)
+                .withEndAction(onDone)
+            if (translate != 0f) {
+                animate.translationY((-16).toPx * translate)
+            }
+            animate.start()
         }
     }
 }

@@ -1,7 +1,8 @@
-package ru.driics.playm8.ui
+package ru.driics.playm8.ui.onboarding
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -13,6 +14,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import ru.driics.playm8.R
+import ru.driics.playm8.components.bulletin.BulletinFactory
 import ru.driics.playm8.components.viewpager.indicator.ViewPageAdapter
 import ru.driics.playm8.databinding.ActivityOnboardingBinding
 import ru.driics.playm8.databinding.FragmentOnboardingRegisterBinding
@@ -87,13 +89,18 @@ class OnboardingActivity : AppCompatActivity() {
         with(binding) {
             pager.adapter = PagerAdapter()
             pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    updateViewPagerHeight(BottomSheetBehavior.from(binding.frame), pager, position)
+                    updateViewPagerHeight(BottomSheetBehavior.from(frame), pager, position)
 
                     val step = steps[position]
                     next.apply {
-                        setOnClickListener { step.action() }
+                        setOnClickListener {
+                            BulletinFactory.of(frame)
+                                .createErrorBulletin("Test")
+                                .show()
+                        }
                         setEndDrawable(step.actionDrawable)
                         setText(step.actionText)
                     }
@@ -108,14 +115,16 @@ class OnboardingActivity : AppCompatActivity() {
         viewPager: ViewPager2,
         position: Int
     ) {
-        viewPager.post {
-            val fragment = supportFragmentManager.findFragmentByTag("f${position}")
-            fragment?.view?.let {
-                behavior.state =
-                    if (viewPager.layoutParams.height < it.height)
-                        BottomSheetBehavior.STATE_EXPANDED
-                    else BottomSheetBehavior.STATE_COLLAPSED
+        val currentFragment = supportFragmentManager.findFragmentByTag("f$position")
+
+        viewPager.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                viewPager.viewTreeObserver.removeOnGlobalLayoutListener(this)
+
+                val desiredHeight = currentFragment?.view?.measuredHeight ?: viewPager.height
+                behavior.peekHeight = desiredHeight
             }
-        }
+        })
     }
 }

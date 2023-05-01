@@ -1,4 +1,4 @@
-package ru.driics.playm8.ui
+package ru.driics.playm8.ui.onboarding
 
 import android.os.Bundle
 import android.view.View

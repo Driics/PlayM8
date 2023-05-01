@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FF06070A"
-    tools:context=".ui.OnboardingActivity">
+    tools:context=".ui.onboarding.OnboardingActivity">
 
     <FrameLayout
         android:id="@+id/frame"
