@@ -14,7 +14,7 @@
         android:theme="@style/Theme.PlayM8"
         tools:targetApi="33">
         <activity
-            android:name=".ui.onboarding.OnboardingActivity"
+            android:name=".presentation.onboarding.OnboardingActivity"
             android:exported="true"
             android:theme="@style/Theme.PlayM8">
             <intent-filter>

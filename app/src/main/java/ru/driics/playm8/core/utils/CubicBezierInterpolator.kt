@@ -1,4 +1,4 @@
-package ru.driics.playm8.utils
+package ru.driics.playm8.core.utils
 
 import android.graphics.PointF
 import android.view.animation.Interpolator

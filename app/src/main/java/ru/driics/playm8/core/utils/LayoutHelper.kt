@@ -1,9 +1,9 @@
-package ru.driics.playm8.utils
+package ru.driics.playm8.core.utils
 
 import android.view.Gravity
 import android.widget.FrameLayout
 import androidx.core.view.ViewCompat
-import ru.driics.playm8.utils.ViewUtils.toPx
+import ru.driics.playm8.core.utils.ViewUtils.toPx
 
 
 object LayoutHelper {

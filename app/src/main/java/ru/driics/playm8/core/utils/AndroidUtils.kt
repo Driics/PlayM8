@@ -1,4 +1,4 @@
-package ru.driics.playm8.utils
+package ru.driics.playm8.core.utils
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -13,7 +13,7 @@ import android.view.accessibility.AccessibilityManager
 import android.widget.Button
 import androidx.annotation.DrawableRes
 import ru.driics.playm8.MyApplication
-import ru.driics.playm8.utils.ViewUtils.toPx
+import ru.driics.playm8.core.utils.ViewUtils.toPx
 
 
 object AndroidUtils {

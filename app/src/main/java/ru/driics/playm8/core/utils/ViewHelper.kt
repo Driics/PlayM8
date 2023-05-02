@@ -1,7 +1,7 @@
-package ru.driics.playm8.utils
+package ru.driics.playm8.core.utils
 
 import android.view.View
-import ru.driics.playm8.utils.ViewUtils.toPx
+import ru.driics.playm8.core.utils.ViewUtils.toPx
 
 object ViewHelper {
     fun setPadding(view: View, padding: Float) {

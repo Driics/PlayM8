@@ -1,4 +1,4 @@
-package ru.driics.playm8.ui.onboarding
+package ru.driics.playm8.presentation.onboarding
 
 import android.os.Bundle
 import android.view.View
@@ -13,13 +13,14 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import dagger.hilt.android.AndroidEntryPoint
 import ru.driics.playm8.R
 import ru.driics.playm8.components.bulletin.BulletinFactory
 import ru.driics.playm8.components.viewpager.indicator.ViewPageAdapter
 import ru.driics.playm8.databinding.ActivityOnboardingBinding
 import ru.driics.playm8.databinding.FragmentOnboardingRegisterBinding
-import ru.driics.playm8.utils.AndroidUtils.setEndDrawable
-import ru.driics.playm8.utils.ViewUtils.viewBinding
+import ru.driics.playm8.core.utils.AndroidUtils.setEndDrawable
+import ru.driics.playm8.core.utils.ViewUtils.viewBinding
 
 class OnboardingRegisterFragment : Fragment(R.layout.fragment_onboarding_register) {
     private lateinit var binding: FragmentOnboardingRegisterBinding
@@ -30,6 +31,7 @@ class OnboardingRegisterFragment : Fragment(R.layout.fragment_onboarding_registe
     }
 }
 
+@AndroidEntryPoint
 class OnboardingActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityOnboardingBinding::inflate)
 
