@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1096962891475",
+    "project_id": "playm8-fc1de",
+    "storage_bucket": "playm8-fc1de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096962891475:android:1538f6e3fc84336a93fe26",
+        "android_client_info": {
+          "package_name": "ru.driics.playm8"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096962891475-6f3jhno51jakbqg9p9drs5qiinsjnmu6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq_zcjyIr_ScMEgY8g8PWG2KZEOco95EI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096962891475-6f3jhno51jakbqg9p9drs5qiinsjnmu6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
