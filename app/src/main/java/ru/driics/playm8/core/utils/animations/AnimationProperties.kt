@@ -1,4 +1,4 @@
-package ru.driics.playm8.core.utils
+package ru.driics.playm8.core.utils.animations
 
 import android.util.Property
 

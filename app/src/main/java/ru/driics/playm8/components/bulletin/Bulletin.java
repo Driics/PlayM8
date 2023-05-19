@@ -63,11 +63,11 @@ import java.util.List;
 
 import ru.driics.playm8.R;
 import ru.driics.playm8.core.utils.AndroidUtils;
-import ru.driics.playm8.core.utils.AnimationProperties;
-import ru.driics.playm8.core.utils.CubicBezierInterpolator;
-import ru.driics.playm8.core.utils.LayoutHelper;
-import ru.driics.playm8.core.utils.ViewHelper;
 import ru.driics.playm8.core.utils.ViewUtils;
+import ru.driics.playm8.core.utils.animations.AnimationProperties;
+import ru.driics.playm8.core.utils.animations.CubicBezierInterpolator;
+import ru.driics.playm8.core.utils.layout.LayoutHelper;
+import ru.driics.playm8.core.utils.layout.ViewHelper;
 
 public class Bulletin {
 

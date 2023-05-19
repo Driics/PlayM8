@@ -14,6 +14,7 @@ import android.widget.Button
 import androidx.annotation.DrawableRes
 import ru.driics.playm8.MyApplication
 import ru.driics.playm8.core.utils.ViewUtils.toPx
+import ru.driics.playm8.core.utils.animations.CubicBezierInterpolator
 
 
 object AndroidUtils {

@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -17,13 +19,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.driics.playm8.R
 import ru.driics.playm8.components.bulletin.BulletinFactory
 import ru.driics.playm8.components.viewpager.indicator.ViewPageAdapter
-import ru.driics.playm8.databinding.ActivityOnboardingBinding
-import ru.driics.playm8.databinding.FragmentOnboardingRegisterBinding
 import ru.driics.playm8.core.utils.AndroidUtils.setEndDrawable
 import ru.driics.playm8.core.utils.ViewUtils.viewBinding
+import ru.driics.playm8.databinding.ActivityOnboardingBinding
+import ru.driics.playm8.databinding.FragmentOnboardingRegisterBinding
+import ru.driics.playm8.domain.model.Response
+import ru.driics.playm8.presentation.auth.AuthViewModel
+
 
 class OnboardingRegisterFragment : Fragment(R.layout.fragment_onboarding_register) {
     private lateinit var binding: FragmentOnboardingRegisterBinding
+    private val viewModel: AuthViewModel by viewModels({ requireActivity() })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,9 +37,11 @@ class OnboardingRegisterFragment : Fragment(R.layout.fragment_onboarding_registe
     }
 }
 
+
 @AndroidEntryPoint
 class OnboardingActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityOnboardingBinding::inflate)
+    private val viewModel: AuthViewModel by viewModels()
 
     inner class Step(
         val action: () -> Unit = ::navigateNext,
@@ -69,7 +77,11 @@ class OnboardingActivity : AppCompatActivity() {
             }
         }
 
-        steps += Step {
+        steps += Step(
+            action = {
+                navigateNext()
+            }
+        ) {
             OnboardingRegisterFragment()
         }
     }
@@ -98,11 +110,7 @@ class OnboardingActivity : AppCompatActivity() {
 
                     val step = steps[position]
                     next.apply {
-                        setOnClickListener {
-                            BulletinFactory.of(frame)
-                                .createErrorBulletin("Test")
-                                .show()
-                        }
+                        setOnClickListener { step.action() }
                         setEndDrawable(step.actionDrawable)
                         setText(step.actionText)
                     }
@@ -110,6 +118,11 @@ class OnboardingActivity : AppCompatActivity() {
             })
             shapePageIndicator.setCustomViewPagerAdapter(ViewPageAdapter(pager))
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.root.requestLayout()
     }
 
     private fun updateViewPagerHeight(
@@ -125,7 +138,9 @@ class OnboardingActivity : AppCompatActivity() {
                 viewPager.viewTreeObserver.removeOnGlobalLayoutListener(this)
 
                 val desiredHeight = currentFragment?.view?.measuredHeight ?: viewPager.height
-                behavior.peekHeight = desiredHeight
+                behavior.state = if (desiredHeight > viewPager.height)
+                    BottomSheetBehavior.STATE_EXPANDED
+                else BottomSheetBehavior.STATE_HALF_EXPANDED
             }
         })
     }

@@ -1,4 +1,4 @@
-package ru.driics.playm8.core.utils
+package ru.driics.playm8.core.utils.layout
 
 import android.view.View
 import ru.driics.playm8.core.utils.ViewUtils.toPx

@@ -5,6 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.driics.playm8.domain.model.Response
@@ -21,6 +24,9 @@ class AuthViewModel @Inject constructor(
         getAuthState()
     }
 
+    val user: FirebaseUser?
+        get() = Firebase.auth.currentUser
+
     var signInResponse by mutableStateOf<SignInResponse>(Response.Success(false))
         private set
     var signOutResponse by mutableStateOf<SignOutResponse>(Response.Success(false))
@@ -28,9 +34,9 @@ class AuthViewModel @Inject constructor(
 
     fun getAuthState() = useCases.getAuthState(viewModelScope)
 
-    fun signIn() = viewModelScope.launch {
+    fun signIn(email: String, password: String) = viewModelScope.launch {
         signInResponse = Response.Loading
-        signInResponse = useCases.signIn()
+        signInResponse = useCases.signIn(email, password)
     }
 
     fun signOut() = viewModelScope.launch {

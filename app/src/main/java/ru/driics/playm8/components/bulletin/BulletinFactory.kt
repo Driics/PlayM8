@@ -1,17 +1,18 @@
 package ru.driics.playm8.components.bulletin
 
 import android.content.Context
+import android.content.res.Resources.Theme
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
-import android.util.Log
+import android.util.TypedValue
 import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
-import com.airbnb.lottie.LottieProperty
-import com.airbnb.lottie.model.KeyPath
 import ru.driics.playm8.MyApplication
 import ru.driics.playm8.R
+import ru.driics.playm8.components.bulletin.Bulletin.LoadingLottieLayout
 import ru.driics.playm8.components.bulletin.Bulletin.LottieLayout
+import ru.driics.playm8.components.bulletin.Bulletin.UndoButton
 
 
 class BulletinFactory private constructor(
@@ -86,7 +87,7 @@ class BulletinFactory private constructor(
             hideImage()
             titleTextView.text = title
             subtitleTextView.text = subtitle
-            button = Bulletin.UndoButton(context, true).apply {
+            button = UndoButton(context, true).apply {
                 setText(buttonText)
                 setUndoAction(onButtonClick)
             }
@@ -103,7 +104,8 @@ class BulletinFactory private constructor(
         layout.textView.isSingleLine = false
         layout.textView.maxLines = 2
 
-        layout.imageView.addValueCallback(
+        // TODO: Change color to red
+        /*layout.imageView.addValueCallback(
             KeyPath("**"),
             LottieProperty.COLOR_FILTER
         ) {
@@ -111,10 +113,11 @@ class BulletinFactory private constructor(
                 0xFF000000.toInt(),
                 PorterDuff.Mode.SRC_ATOP
             )
-        }
+        }*/
 
         return create(layout, Bulletin.DURATION_SHORT)
     }
+
 
     private fun create(layout: Bulletin.Layout, duration: Int): Bulletin {
         return if (fragment != null) {
