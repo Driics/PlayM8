@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="start"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/titleText"
             style="@style/PlayM8.Text.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="32dp"
-            android:text="Register" />
+            android:text="@string/register_user" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/userName"
@@ -57,5 +61,24 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/registerOrLoginUser"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:text="@string/register_user" />
+
+        <TextView
+            android:id="@+id/loginText"
+            android:gravity="center"
+            style="@style/PlayM8.Text.DefaultSmall"
+            android:layout_marginTop="22dp"
+            android:text="Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </ScrollView>

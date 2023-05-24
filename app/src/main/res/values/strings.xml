@@ -5,4 +5,9 @@
 
     <string name="onboarding_welcome_title">Team Up, Game On</string>
     <string name="onboarding_welcome_desc">Whether you\'re a hardcore gamer or just looking for someone to play with, our app connects you with like-minded players.</string>
+
+    <string name="login_user">Login</string>
+    <string name="register_user">Register</string>
+    <string name="login_user_text">Already have an account? Sign in!</string>
+    <string name="register_user_text">Don\'t you have an account? Register!</string>
 </resources>

@@ -20,7 +20,7 @@
 
     <style name="Widget.DS.PageIndicator" parent="">
         <item name="ds_activeIndicatorScale">3.5</item>
-        <item name="ds_changeIndicatorsColor">false</item>
+        <item name="ds_changeIndicatorsColor">true</item>
         <item name="ds_indicatorShape">rectangle</item>
         <item name="ds_indicatorShapeCornerRadius">max</item>
         <item name="ds_indicatorShapeStyle">fill</item>

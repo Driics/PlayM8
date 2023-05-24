@@ -1,6 +1,7 @@
 package ru.driics.playm8.di
 
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +14,5 @@ import ru.driics.playm8.domain.repository.AuthRepository
 class AppModule {
 
     @Provides
-    fun provideAuthRepository(
-        auth: FirebaseAuth
-    ): AuthRepository = AuthRepositoryImpl(auth)
+    fun provideAuthRepository(): AuthRepository = AuthRepositoryImpl(Firebase.auth)
 }
