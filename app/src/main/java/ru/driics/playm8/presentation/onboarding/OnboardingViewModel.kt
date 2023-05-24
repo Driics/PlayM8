@@ -16,5 +16,5 @@ class OnboardingViewModel @Inject constructor(
 
     fun getAuthState() = repo.getAuthState(viewModelScope)
 
-
+    val currentUser = repo.currentUser
 }

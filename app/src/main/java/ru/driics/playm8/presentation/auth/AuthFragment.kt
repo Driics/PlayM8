@@ -1,4 +1,4 @@
-package ru.driics.playm8.presentation.signUp
+package ru.driics.playm8.presentation.auth
 
 import android.os.Bundle
 import android.text.Spannable
@@ -14,11 +14,12 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import ru.driics.playm8.R
 import ru.driics.playm8.databinding.FragmentOnboardingRegisterBinding
+import ru.driics.playm8.domain.model.AuthOperation
 import ru.driics.playm8.domain.model.Response
 
-class SignUpFragment : Fragment(R.layout.fragment_onboarding_register) {
+class AuthFragment : Fragment(R.layout.fragment_onboarding_register) {
     private lateinit var binding: FragmentOnboardingRegisterBinding
-    private val viewModel: SignUpViewModel by viewModels({ requireActivity() })
+    private val viewModel: AuthViewModel by viewModels({ requireActivity() })
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,29 +32,19 @@ class SignUpFragment : Fragment(R.layout.fragment_onboarding_register) {
                 setOnClickListener { viewModel.changeUserState() }
             }
 
-            registerOrLoginUser.setOnClickListener {
-                viewModel.signUpWithEmailAndPassword(
-                    binding.email.editText?.text.toString(),
-                    binding.password.editText?.text.toString(),
-                )
-            }
-        }
+            authUserBtn.setOnClickListener {
+                val email = binding.email.editText?.text.toString()
+                val password = binding.password.editText?.text.toString()
+                val operation =
+                    if (viewModel.loginUser.value) AuthOperation.SIGN_IN else AuthOperation.SIGN_UP
 
-        viewModel.isNotNewUser.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.registerOrLoginUser.text = getString(R.string.login_user)
-                binding.titleText.text = getString(R.string.login_user)
-                binding.loginText.text = createUnderlinedText(getString(R.string.login_user_text))
-            } else {
-                binding.registerOrLoginUser.text = getString(R.string.register_user)
-                binding.titleText.text = getString(R.string.register_user)
-                binding.loginText.text = createUnderlinedText(getString(R.string.login_user_text))
+                viewModel.performAuthOperation(email, password, operation)
             }
         }
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.signUpResponse.collect {
+                viewModel.authResponse.collect {
                     when (it) {
                         is Response.Loading -> Snackbar.make(
                             binding.root,
@@ -63,7 +54,7 @@ class SignUpFragment : Fragment(R.layout.fragment_onboarding_register) {
 
                         is Response.Success -> Snackbar.make(
                             binding.root,
-                            "Loading.. ${it.data}",
+                            "Success ${it.data} \n Login: ${viewModel.loginUser.value}",
                             Snackbar.LENGTH_SHORT
                         ).show()
 
@@ -76,6 +67,24 @@ class SignUpFragment : Fragment(R.layout.fragment_onboarding_register) {
                         }
 
                         else -> Unit
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.loginUser.collect {
+                    if (it) {
+                        binding.authUserBtn.text = getString(R.string.login_user)
+                        binding.titleText.text = getString(R.string.login_user)
+                        binding.loginText.text =
+                            createUnderlinedText(getString(R.string.login_user_text))
+                    } else {
+                        binding.authUserBtn.text = getString(R.string.register_user)
+                        binding.titleText.text = getString(R.string.register_user)
+                        binding.loginText.text =
+                            createUnderlinedText(getString(R.string.login_user_text))
                     }
                 }
             }

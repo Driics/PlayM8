@@ -1,5 +1,6 @@
 package ru.driics.playm8.presentation.onboarding
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
@@ -12,13 +13,15 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.UserProfileChangeRequest
 import dagger.hilt.android.AndroidEntryPoint
 import ru.driics.playm8.R
 import ru.driics.playm8.components.viewpager.indicator.ViewPageAdapter
 import ru.driics.playm8.core.utils.AndroidUtils.setEndDrawable
 import ru.driics.playm8.core.utils.ViewUtils.viewBinding
 import ru.driics.playm8.databinding.ActivityOnboardingBinding
-import ru.driics.playm8.presentation.signUp.SignUpFragment
+import ru.driics.playm8.presentation.auth.AuthFragment
 
 @AndroidEntryPoint
 class OnboardingActivity : AppCompatActivity() {
@@ -60,7 +63,7 @@ class OnboardingActivity : AppCompatActivity() {
         }
 
         steps += Step {
-            SignUpFragment()
+            AuthFragment()
         }
     }
 
@@ -77,6 +80,12 @@ class OnboardingActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         initSteps()
+
+        val isUserSignedOut = viewModel.getAuthState().value
+        if (!isUserSignedOut) {
+            Snackbar.make(binding.root, "Username: ${viewModel.currentUser?.displayName} \n Email: ${viewModel.currentUser?.email}", Snackbar.LENGTH_SHORT)
+                .show()
+        }
 
         with(binding) {
             pager.adapter = PagerAdapter()
