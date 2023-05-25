@@ -4,12 +4,12 @@
         <item name="fontFamily">@font/syne_medium</item>
         <item name="android:windowTranslucentStatus">true</item>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/accent</item>
+        <item name="colorAccent">@color/accent</item>
         <item name="colorPrimaryVariant">@color/accent</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryVariant">@color/accent</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
@@ -35,12 +35,18 @@
         <item name="ds_indicatorSpacing">@dimen/ds_page_indicator_height_spacing_xsmall</item>
     </style>
 
-    <style name="PlayM8.Text" parent="TextAppearance.AppCompat"/>
+    <style name="PlayM8.Text" parent="TextAppearance.AppCompat" />
 
-    <style name="PlayM8.Text.DefaultSmall" parent="">
+    <style name="PlayM8.Text.DefaultSmall">
         <item name="android:fontFamily">@font/syne_medium</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/text_norm_selector</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
+
+    <style name="PlayM8.Text.DefaultSmall.Weak">
+        <item name="android:textColor">@color/text_weak_selector</item>
     </style>
 
     <style name="PlayM8.Text.Medium" parent="">
@@ -63,7 +69,7 @@
     </style>
 
     <style name="PlayM8.Text.Caption.Weak">
-        <item name="android:textColor">@color/text_weak_selector</item>
+        <item name="android:textColor">@color/lamantine</item>
     </style>
 
     <style name="Theme.PlayM8.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
@@ -102,4 +108,38 @@
     <style name="Theme.PlayM8.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.PlayM8.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SectionHeadlineText">
+        <item name="android:textAppearance">@style/PlayM8.Text.DefaultSmall</item>
+        <item name="android:textColor">#6D697D</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="SectionHeadlineText.Brand">
+        <item name="android:textColor">?attr/colorAccent</item>
+    </style>
+
+    <style name="TableRowLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="TableLabelText" parent="@style/PlayM8.Text.DefaultSmall.Weak">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <style name="TableValueText" parent="PlayM8.Text.DefaultSmall">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">end</item>
+    </style>
 </resources>

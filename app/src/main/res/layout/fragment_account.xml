@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/accountDetails"
+        style="@style/SectionHeadlineText.Brand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/accoutDetails" />
+
+    <LinearLayout style="@style/TableRowLayout">
+
+        <TextView
+            android:id="@+id/userLabel"
+            style="@style/TableLabelText"
+            android:text="@string/accountUser" />
+
+        <TextView
+            android:id="@+id/textUser"
+            style="@style/TableValueText"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="example@protonmail.com" />
+    </LinearLayout>
+
+    <View style="@style/Divider.Small" />
+
+    <LinearLayout style="@style/TableRowLayout">
+
+        <TextView
+            android:id="@+id/versionLabel"
+            style="@style/TableLabelText"
+            android:text="@string/accountVersion" />
+
+        <TextView
+            android:id="@+id/textVersion"
+            style="@style/TableValueText"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="1.0.0" />
+    </LinearLayout>
+
+    <View style="@style/Divider.Small" />
+</LinearLayout>

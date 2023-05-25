@@ -1,6 +1,5 @@
 package ru.driics.playm8.core.utils
 
-import android.R
 import android.app.Activity
 import android.content.res.ColorStateList
 import android.content.res.Resources
@@ -77,16 +76,17 @@ object ViewUtils {
                             val rad = if (radius <= 0) (6).toPx else radius.toFloat()
                             canvas.drawRoundRect(rect!!, rad, rad, maskPaint)
                         } else {
-                            val rad: Int = if (maskType == RIPPLE_MASK_CIRCLE_20DP || maskType == 6) {
-                                if (radius <= 0) (20).toPx.toInt() else radius
-                            } else if (maskType == RIPPLE_MASK_CIRCLE_TO_BOUND_EDGE) {
-                                bounds.width().coerceAtLeast(bounds.height()) / 2
-                            } else {
-                                // RIPPLE_MASK_CIRCLE_AUTO = 5
-                                // RIPPLE_MASK_CIRCLE_TO_BOUND_CORNER = 4
-                                ceil(sqrt(((bounds.left - bounds.centerX()) * (bounds.left - bounds.centerX()) + (bounds.top - bounds.centerY()) * (bounds.top - bounds.centerY())).toDouble()))
-                                    .toInt()
-                            }
+                            val rad: Int =
+                                if (maskType == RIPPLE_MASK_CIRCLE_20DP || maskType == 6) {
+                                    if (radius <= 0) (20).toPx.toInt() else radius
+                                } else if (maskType == RIPPLE_MASK_CIRCLE_TO_BOUND_EDGE) {
+                                    bounds.width().coerceAtLeast(bounds.height()) / 2
+                                } else {
+                                    // RIPPLE_MASK_CIRCLE_AUTO = 5
+                                    // RIPPLE_MASK_CIRCLE_TO_BOUND_CORNER = 4
+                                    ceil(sqrt(((bounds.left - bounds.centerX()) * (bounds.left - bounds.centerX()) + (bounds.top - bounds.centerY()) * (bounds.top - bounds.centerY())).toDouble()))
+                                        .toInt()
+                                }
                             canvas.drawCircle(
                                 bounds.centerX().toFloat(),
                                 bounds.centerY().toFloat(),
@@ -116,8 +116,14 @@ object ViewUtils {
             rippleDrawable
         } else {
             val stateListDrawable = StateListDrawable()
-            stateListDrawable.addState(intArrayOf(R.attr.state_pressed), ColorDrawable(color))
-            stateListDrawable.addState(intArrayOf(R.attr.state_selected), ColorDrawable(color))
+            stateListDrawable.addState(
+                intArrayOf(android.R.attr.state_pressed),
+                ColorDrawable(color)
+            )
+            stateListDrawable.addState(
+                intArrayOf(android.R.attr.state_selected),
+                ColorDrawable(color)
+            )
             stateListDrawable.addState(StateSet.WILD_CARD, ColorDrawable(0x00000000))
             stateListDrawable
         }

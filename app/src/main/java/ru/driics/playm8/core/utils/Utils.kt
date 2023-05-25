@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.RippleDrawable
 import android.os.Build
 import android.util.StateSet
+import com.google.firebase.auth.FirebaseUser
 import ru.driics.playm8.core.utils.ViewUtils.toPx
 import ru.driics.playm8.core.utils.random.Xoroshiro128PlusRandom
 import java.security.SecureRandom
@@ -124,9 +125,6 @@ object Utils {
         bottomRightRad: Float,
         bottomLeftRad: Float
     ) {
-        if (Build.VERSION.SDK_INT < 21) {
-            return
-        }
         if (rippleDrawable is RippleDrawable) {
             val drawable = rippleDrawable
             val count = drawable.numberOfLayers

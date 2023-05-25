@@ -2,6 +2,7 @@ package ru.driics.playm8.core.utils
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -12,6 +13,11 @@ import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityManager
 import android.widget.Button
 import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import ru.driics.playm8.MyApplication
 import ru.driics.playm8.core.utils.ViewUtils.toPx
 import ru.driics.playm8.core.utils.animations.CubicBezierInterpolator
@@ -25,6 +31,14 @@ object AndroidUtils {
         val intent = Intent(this, T::class.java)
         intent.init()
         startActivity(intent, options)
+    }
+
+    inline fun <reified T : Fragment> AppCompatActivity.launchFragment(@IdRes fragmentContainerId: Int) {
+        supportFragmentManager.commit {
+            replace<T>(fragmentContainerId)
+            setReorderingAllowed(true)
+            addToBackStack(T::class.java.name)
+        }
     }
 
     fun Context.registerBroadcastReceiver(

@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.navigation.NavigationView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.navigation.NavigationView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="?attr/playm8_background_norm"
     android:id="@+id/navigationDrawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="start"
+    android:fitsSystemWindows="true"
     app:headerLayout="@layout/account_view"
     app:menu="@menu/activity_main_drawer">
+
+    <TextView
+        android:id="@+id/textVersion"
+        style="@style/PlayM8.Text.Caption.Hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="24dp"
+        tools:text="1.0.0" />
 </com.google.android.material.navigation.NavigationView>

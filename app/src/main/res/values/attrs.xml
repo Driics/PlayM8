@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <item name="view_binding_tag" type="id" />
+
     <declare-styleable name="Theme.PlayM8">
-        <attr name="playm8_text_weak" format="reference"/>
-        <attr name="playm8_text_disabled" format="reference"/>
-        <attr name="playm8_text_norm" format="reference"/>
-        <attr name="playm8_background_norm" format="reference"/>
-        <attr name="playm8_interaction_norm" format="reference"/>
+        <attr name="playm8_text_weak" format="reference" />
+        <attr name="playm8_text_disabled" format="reference" />
+        <attr name="playm8_text_norm" format="reference" />
+        <attr name="playm8_background_norm" format="reference" />
+        <attr name="playm8_interaction_norm" format="reference" />
     </declare-styleable>
 
     <attr name="ds_pageIndicatorPrimary" format="color" />

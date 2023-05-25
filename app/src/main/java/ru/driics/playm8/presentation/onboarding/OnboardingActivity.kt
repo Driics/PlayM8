@@ -1,5 +1,6 @@
 package ru.driics.playm8.presentation.onboarding
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
@@ -10,12 +11,10 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import ru.driics.playm8.R
 import ru.driics.playm8.components.viewpager.indicator.ViewPageAdapter
 import ru.driics.playm8.core.utils.AndroidUtils.launchActivity
@@ -24,7 +23,7 @@ import ru.driics.playm8.core.utils.ViewUtils.onClick
 import ru.driics.playm8.core.utils.ViewUtils.viewBinding
 import ru.driics.playm8.databinding.ActivityOnboardingBinding
 import ru.driics.playm8.presentation.auth.AuthFragment
-import ru.driics.playm8.presentation.main.MainActivity
+import ru.driics.playm8.presentation.home.HomeActivity
 
 @AndroidEntryPoint
 class OnboardingActivity : AppCompatActivity() {
@@ -71,25 +70,21 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun navigateNext() = with(binding.pager) {
-        if (currentItem + 1 == adapter?.itemCount)
+        if (currentItem + 1 == adapter?.itemCount) {
             finish()
-        else setCurrentItem(currentItem + 1, true)
+        } else setCurrentItem(currentItem + 1, true)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(binding.root)
-
         supportActionBar?.hide()
-
         initSteps()
 
-        lifecycleScope.launch {
-            val isUserSignedOut = viewModel.getAuthState().value
-            if (!isUserSignedOut) {
-                launchActivity<MainActivity>()
-            }
+        val isUserSignedOut = viewModel.getAuthState().value
+        if (!isUserSignedOut) {
+            launchActivity<HomeActivity>()
         }
 
         with(binding) {
@@ -105,7 +100,7 @@ class OnboardingActivity : AppCompatActivity() {
                         onClick { step.action() }
                         setEndDrawable(step.actionDrawable)
                         setText(step.actionText)
-                        visibility = if (position == steps.size - 1) View.GONE else View.VISIBLE
+
                     }
                 }
             })
