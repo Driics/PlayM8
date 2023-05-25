@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="start"
+    tools:openDrawer="start">
+
+    <include
+        android:id="@+id/drawerChrome"
+        layout="@layout/chrome_home" />
+
+    <include
+        android:id="@+id/drawerHome"
+        layout="@layout/drawer_home" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,7 +1,7 @@
 package ru.driics.playm8.presentation.onboarding
 
-import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
 import androidx.activity.viewModels
@@ -10,18 +10,21 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.UserProfileChangeRequest
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import ru.driics.playm8.R
 import ru.driics.playm8.components.viewpager.indicator.ViewPageAdapter
+import ru.driics.playm8.core.utils.AndroidUtils.launchActivity
 import ru.driics.playm8.core.utils.AndroidUtils.setEndDrawable
+import ru.driics.playm8.core.utils.ViewUtils.onClick
 import ru.driics.playm8.core.utils.ViewUtils.viewBinding
 import ru.driics.playm8.databinding.ActivityOnboardingBinding
 import ru.driics.playm8.presentation.auth.AuthFragment
+import ru.driics.playm8.presentation.main.MainActivity
 
 @AndroidEntryPoint
 class OnboardingActivity : AppCompatActivity() {
@@ -75,16 +78,18 @@ class OnboardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(binding.root)
 
         supportActionBar?.hide()
 
         initSteps()
 
-        val isUserSignedOut = viewModel.getAuthState().value
-        if (!isUserSignedOut) {
-            Snackbar.make(binding.root, "Username: ${viewModel.currentUser?.displayName} \n Email: ${viewModel.currentUser?.email}", Snackbar.LENGTH_SHORT)
-                .show()
+        lifecycleScope.launch {
+            val isUserSignedOut = viewModel.getAuthState().value
+            if (!isUserSignedOut) {
+                launchActivity<MainActivity>()
+            }
         }
 
         with(binding) {
@@ -97,9 +102,10 @@ class OnboardingActivity : AppCompatActivity() {
 
                     val step = steps[position]
                     next.apply {
-                        setOnClickListener { step.action() }
+                        onClick { step.action() }
                         setEndDrawable(step.actionDrawable)
                         setText(step.actionText)
+                        visibility = if (position == steps.size - 1) View.GONE else View.VISIBLE
                     }
                 }
             })

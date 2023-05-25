@@ -17,12 +17,20 @@ import android.os.Build
 import android.util.StateSet
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import androidx.viewbinding.ViewBinding
 import kotlin.math.ceil
 import kotlin.math.sqrt
 
 
 object ViewUtils {
+    /**
+     * Shortcut for [View.setOnClickListener]
+     * This also allow us to pass a function KProperty argument
+     * e.g. `` view.onClick(::rickRoll) ``
+     */
+    inline fun View.onClick(crossinline block: () -> Unit) = setOnClickListener { block() }
+
     inline fun <VB : ViewBinding> Activity.viewBinding(crossinline inflater: (LayoutInflater) -> VB) =
         lazy(LazyThreadSafetyMode.NONE) { inflater(layoutInflater) }
 

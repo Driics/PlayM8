@@ -24,6 +24,7 @@ class AuthViewModel @Inject constructor(
     val loginUser: StateFlow<Boolean> = _isNotNewUser.asStateFlow()
 
     fun performAuthOperation(
+        username: String,
         email: String,
         password: String,
         operation: AuthOperation
@@ -33,7 +34,11 @@ class AuthViewModel @Inject constructor(
         try {
             _authResponse.value = when (operation) {
                 AuthOperation.SIGN_IN -> repo.firebaseSignInWithEmailAndPassword(email, password)
-                AuthOperation.SIGN_UP -> repo.firebaseSignUpWithEmailAndPassword(email, password)
+                AuthOperation.SIGN_UP -> repo.firebaseSignUpWithEmailAndPassword(
+                    username,
+                    email,
+                    password
+                )
             }
         } catch (e: Exception) {
             _authResponse.value = Response.Failure(e)

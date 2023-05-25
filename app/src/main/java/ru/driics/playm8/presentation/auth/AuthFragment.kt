@@ -33,12 +33,13 @@ class AuthFragment : Fragment(R.layout.fragment_onboarding_register) {
             }
 
             authUserBtn.setOnClickListener {
+                val nickname = binding.nickname.editText?.text.toString()
                 val email = binding.email.editText?.text.toString()
                 val password = binding.password.editText?.text.toString()
                 val operation =
                     if (viewModel.loginUser.value) AuthOperation.SIGN_IN else AuthOperation.SIGN_UP
 
-                viewModel.performAuthOperation(email, password, operation)
+                viewModel.performAuthOperation(nickname, email, password, operation)
             }
         }
 

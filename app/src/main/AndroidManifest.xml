@@ -14,6 +14,15 @@
         android:theme="@style/Theme.PlayM8"
         tools:targetApi="33">
         <activity
+            android:name=".presentation.main.MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.PlayM8.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".presentation.onboarding.OnboardingActivity"
             android:exported="true"
             android:theme="@style/Theme.PlayM8">

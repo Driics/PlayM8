@@ -3,6 +3,7 @@ package ru.driics.playm8.data.repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.SharingStarted
@@ -29,11 +30,19 @@ class AuthRepositoryImpl @Inject constructor(
         get() = auth.currentUser
 
     override suspend fun firebaseSignUpWithEmailAndPassword(
+        nickname: String,
         email: String,
         password: String
     ): SignUpResponse {
         return try {
-            auth.createUserWithEmailAndPassword(email, password).await()
+            val authResult = auth.createUserWithEmailAndPassword(email, password).await()
+
+            val userProfileChangeRequest = UserProfileChangeRequest.Builder()
+                .setDisplayName(nickname)
+                .build()
+
+            authResult.user?.updateProfile(userProfileChangeRequest)?.await()
+
             Response.Success(true)
         } catch (e: Exception) {
             Response.Failure(e)

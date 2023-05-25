@@ -12,4 +12,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="lamantine">#FFA7A4B5</color>
+    <color name="smoky">#FF5B576B</color>
 </resources>
