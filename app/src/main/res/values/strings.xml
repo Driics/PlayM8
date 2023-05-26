@@ -25,4 +25,11 @@
     <string name="bottom_label_messenger">Messenger</string>
     <string name="bottom_label_news">News</string>
     <string name="logOut">Log out</string>
+
+    <string name="password_error_length">The password must be at least 8 characters long</string>
+    <string name="password_error_lowercase">The password must contain at least one lowercase letter</string>
+    <string name="password_error_uppercase">The password must contain at least one capital letter</string>
+    <string name="password_error_digit">The password must contain at least one digit</string>
+
+
 </resources>
