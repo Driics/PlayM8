@@ -85,6 +85,7 @@ class OnboardingActivity : AppCompatActivity() {
         val isUserSignedOut = viewModel.getAuthState().value
         if (!isUserSignedOut) {
             launchActivity<HomeActivity>()
+            finish()
         }
 
         with(binding) {

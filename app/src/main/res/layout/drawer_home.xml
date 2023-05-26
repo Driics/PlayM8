@@ -6,17 +6,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="start"
+    android:backgroundTint="?attr/playm8_background_norm"
     android:fitsSystemWindows="true"
     app:headerLayout="@layout/account_view"
     app:menu="@menu/activity_main_drawer">
 
-    <TextView
-        android:id="@+id/textVersion"
-        style="@style/PlayM8.Text.Caption.Hint"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="24dp"
-        tools:text="1.0.0" />
+        android:layout_marginVertical="24dp">
+
+        <TextView
+            android:id="@+id/logOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|bottom"
+            android:background="@drawable/background_account"
+            android:padding="8dp"
+            app:drawableStartCompat="@drawable/ic_log_out_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Log out" />
+
+        <TextView
+            android:id="@+id/textVersion"
+            style="@style/PlayM8.Text.Caption.Hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1.0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.navigation.NavigationView>

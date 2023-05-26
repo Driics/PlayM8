@@ -17,7 +17,11 @@
     <string name="appVersion">v%1$s</string>
 
     <string name="drawerSettings">Settings</string>
-    <string name="accoutDetails">Account details\n</string>
+    <string name="accoutDetails">Account details</string>
     <string name="accountUser">User:</string>
     <string name="accountVersion">Version:</string>
+    <string name="accountEmail">Email:</string>
+    <string name="bottom_label_home">Dashboard</string>
+    <string name="bottom_label_messenger">Messenger</string>
+    <string name="bottom_label_news">News</string>
 </resources>

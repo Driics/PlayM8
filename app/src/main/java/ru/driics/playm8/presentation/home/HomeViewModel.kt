@@ -13,9 +13,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    repo: AuthRepository
+    private val repo: AuthRepository
 ) : ViewModel() {
 
     val user: FirebaseUser? =
         repo.currentUser
+
+    fun signOut() = repo.signOut()
 }

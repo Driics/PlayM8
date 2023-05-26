@@ -23,6 +23,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
                 viewModel.user?.let {
                     textUser.text = it.displayName
                     textVersion.text = getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME
+                    textEmail.text = it.email
                 }
             }
         }
