@@ -4,6 +4,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.SharingStarted
@@ -28,6 +30,7 @@ class AuthRepositoryImpl @Inject constructor(
 ) : AuthRepository {
     override val currentUser: FirebaseUser?
         get() = auth.currentUser
+
 
     override suspend fun firebaseSignUpWithEmailAndPassword(
         nickname: String,

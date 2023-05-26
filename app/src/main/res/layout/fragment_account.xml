@@ -25,7 +25,24 @@
             style="@style/TableValueText"
             android:ellipsize="end"
             android:maxLines="1"
-            tools:text="example@protonmail.com" />
+            tools:text="deadinside" />
+    </LinearLayout>
+
+    <View style="@style/Divider.Small" />
+
+    <LinearLayout style="@style/TableRowLayout">
+
+        <TextView
+            android:id="@+id/emailLabel"
+            style="@style/TableLabelText"
+            android:text="@string/accountEmail" />
+
+        <TextView
+            android:id="@+id/textEmail"
+            style="@style/TableValueText"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="mail@mail.mail" />
     </LinearLayout>
 
     <View style="@style/Divider.Small" />

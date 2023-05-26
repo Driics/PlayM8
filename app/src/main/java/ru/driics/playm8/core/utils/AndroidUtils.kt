@@ -34,11 +34,10 @@ object AndroidUtils {
     }
 
     inline fun <reified T : Fragment> AppCompatActivity.launchFragment(@IdRes fragmentContainerId: Int) {
-        supportFragmentManager.commit {
-            replace<T>(fragmentContainerId)
-            setReorderingAllowed(true)
-            addToBackStack(T::class.java.name)
-        }
+        supportFragmentManager.beginTransaction()
+            .replace(fragmentContainerId, T::class.java, null)
+            .addToBackStack(T::class.java.simpleName)
+            .commit()
     }
 
     fun Context.registerBroadcastReceiver(

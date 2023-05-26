@@ -13,9 +13,12 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import ru.driics.playm8.R
+import ru.driics.playm8.core.utils.AndroidUtils.launchActivity
+import ru.driics.playm8.core.utils.ViewUtils.onClick
 import ru.driics.playm8.databinding.FragmentOnboardingRegisterBinding
 import ru.driics.playm8.domain.model.AuthOperation
 import ru.driics.playm8.domain.model.Response
+import ru.driics.playm8.presentation.home.HomeActivity
 
 class AuthFragment : Fragment(R.layout.fragment_onboarding_register) {
     private lateinit var binding: FragmentOnboardingRegisterBinding
@@ -29,7 +32,7 @@ class AuthFragment : Fragment(R.layout.fragment_onboarding_register) {
         with(binding) {
             loginText.apply {
                 text = createUnderlinedText(getString(R.string.register_user_text))
-                setOnClickListener { viewModel.changeUserState() }
+                onClick { viewModel.changeUserState() }
             }
 
             authUserBtn.setOnClickListener {
@@ -53,11 +56,10 @@ class AuthFragment : Fragment(R.layout.fragment_onboarding_register) {
                             Snackbar.LENGTH_SHORT
                         ).show()
 
-                        is Response.Success -> Snackbar.make(
-                            binding.root,
-                            "Success ${it.data} \n Login: ${viewModel.loginUser.value}",
-                            Snackbar.LENGTH_SHORT
-                        ).show()
+                        is Response.Success -> if (it.data) {
+                            requireContext().launchActivity<HomeActivity>()
+                            requireActivity().finish()
+                        }
 
                         is Response.Failure -> it.apply {
                             Snackbar.make(
@@ -76,16 +78,20 @@ class AuthFragment : Fragment(R.layout.fragment_onboarding_register) {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.loginUser.collect {
-                    if (it) {
-                        binding.authUserBtn.text = getString(R.string.login_user)
-                        binding.titleText.text = getString(R.string.login_user)
-                        binding.loginText.text =
-                            createUnderlinedText(getString(R.string.login_user_text))
-                    } else {
-                        binding.authUserBtn.text = getString(R.string.register_user)
-                        binding.titleText.text = getString(R.string.register_user)
-                        binding.loginText.text =
-                            createUnderlinedText(getString(R.string.login_user_text))
+                    with(binding) {
+                        if (it) {
+                            authUserBtn.text = getString(R.string.login_user)
+                            titleText.text = getString(R.string.login_user)
+                            nickname.visibility = View.GONE
+                            loginText.text =
+                                createUnderlinedText(getString(R.string.register_user_text))
+                        } else {
+                            authUserBtn.text = getString(R.string.register_user)
+                            titleText.text = getString(R.string.register_user)
+                            nickname.visibility = View.VISIBLE
+                            loginText.text =
+                                createUnderlinedText(getString(R.string.login_user_text))
+                        }
                     }
                 }
             }

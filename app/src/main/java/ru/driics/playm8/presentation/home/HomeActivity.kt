@@ -4,16 +4,19 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import com.google.android.material.snackbar.Snackbar
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.ktx.BuildConfig
 import dagger.hilt.android.AndroidEntryPoint
 import ru.driics.playm8.R
+import ru.driics.playm8.core.utils.AndroidUtils.launchActivity
 import ru.driics.playm8.core.utils.AndroidUtils.launchFragment
 import ru.driics.playm8.core.utils.ViewUtils.onClick
 import ru.driics.playm8.core.utils.ViewUtils.viewBinding
 import ru.driics.playm8.databinding.AccountViewBinding
 import ru.driics.playm8.databinding.ActivityHomeBinding
 import ru.driics.playm8.presentation.home.account.AccountFragment
+import ru.driics.playm8.presentation.onboarding.OnboardingActivity
 import java.util.Locale
 
 @AndroidEntryPoint
@@ -31,6 +34,13 @@ class HomeActivity : AppCompatActivity() {
         initDrawer()
         initDrawerView()
 
+        val navController =
+            (supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment).navController
+        binding.chromeHome.bottomNav.setupWithNavController(navController)
+
+        supportFragmentManager.addOnBackStackChangedListener {
+            updateNavigationIcon()
+        }
     }
 
     private fun initDrawer() {
@@ -38,6 +48,16 @@ class HomeActivity : AppCompatActivity() {
             setNavigationIcon(R.drawable.ic_hamburger)
             setNavigationOnClickListener { toggleDrawer() }
         }
+    }
+
+    private fun updateNavigationIcon() {
+        val icon = if (supportFragmentManager.backStackEntryCount > 0) {
+            R.drawable.round_arrow_back_24
+        } else {
+            R.drawable.ic_hamburger
+        }
+
+        binding.chromeHome.toolbar.setNavigationIcon(icon)
     }
 
     private fun initDrawerView() {
@@ -59,18 +79,26 @@ class HomeActivity : AppCompatActivity() {
                         launchFragment<AccountFragment>(R.id.fragmentContainer)
                         toggleDrawer()
                     }
+
+                    logOut.onClick {
+                        viewModel.signOut()
+                        launchActivity<OnboardingActivity>()
+                        finish()
+                    }
                 }
             }
         }
-
-
     }
 
     private fun toggleDrawer() = with(binding.root) {
         if (isDrawerOpen(GravityCompat.START)) {
             closeDrawer(GravityCompat.START, true)
         } else {
-            openDrawer(GravityCompat.START, true)
+            if (supportFragmentManager.backStackEntryCount > 0) {
+                supportFragmentManager.popBackStack()
+            } else {
+                openDrawer(GravityCompat.START, true)
+            }
         }
     }
 
