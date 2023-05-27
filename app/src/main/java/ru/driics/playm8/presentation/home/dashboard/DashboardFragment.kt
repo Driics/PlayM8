@@ -33,7 +33,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                     "Mobile Legends",
                     0xFFcaca22.toInt()
                 )
-            )
+            ), requireContext()
         )
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }

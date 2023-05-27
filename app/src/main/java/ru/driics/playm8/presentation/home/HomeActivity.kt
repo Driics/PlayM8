@@ -16,13 +16,14 @@ import ru.driics.playm8.core.utils.ViewUtils.viewBinding
 import ru.driics.playm8.databinding.AccountViewBinding
 import ru.driics.playm8.databinding.ActivityHomeBinding
 import ru.driics.playm8.presentation.home.account.AccountFragment
+import ru.driics.playm8.presentation.home.friends.FriendsActivity
 import ru.driics.playm8.presentation.onboarding.OnboardingActivity
 import java.util.Locale
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
-    val binding: ActivityHomeBinding by viewBinding(ActivityHomeBinding::inflate)
-    val viewModel: HomeViewModel by viewModels()
+    private val binding: ActivityHomeBinding by viewBinding(ActivityHomeBinding::inflate)
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,11 +81,45 @@ class HomeActivity : AppCompatActivity() {
                         toggleDrawer()
                     }
 
-                    logOut.onClick {
-                        viewModel.signOut()
-                        launchActivity<OnboardingActivity>()
-                        finish()
+                }
+
+                logOut.onClick {
+                    viewModel.signOut()
+                    launchActivity<OnboardingActivity>()
+                    finish()
+                }
+            }
+
+            navigationDrawer.setCheckedItem(R.id.nav_dashboard)
+
+            navigationDrawer.setNavigationItemSelectedListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.nav_friends -> {
+                        launchActivity<FriendsActivity>()
+                        this@HomeActivity.binding.root.close()
+                        return@setNavigationItemSelectedListener true
                     }
+
+                    /*R.id.nav_notification -> {
+                        launchActivity<NotificationActivity>()
+                        this@HomeActivity.binding.root.close()
+                        return@setNavigationItemSelectedListener true
+                    }
+
+                    R.id.nav_settings -> {
+                        launchActivity<SettingsActivity>()
+                        this@HomeActivity.binding.root.close()
+                        return@setNavigationItemSelectedListener true
+                    }*/
+
+                    R.id.nav_profile -> {
+                        launchFragment<AccountFragment>(R.id.fragmentContainer)
+                        toggleDrawer()
+
+                        return@setNavigationItemSelectedListener true
+                    }
+
+                    else -> false
                 }
             }
         }

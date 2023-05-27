@@ -1,6 +1,5 @@
 package ru.driics.playm8.presentation.onboarding
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
@@ -101,7 +100,7 @@ class OnboardingActivity : AppCompatActivity() {
                         onClick { step.action() }
                         setEndDrawable(step.actionDrawable)
                         setText(step.actionText)
-
+                        visibility = if (position == steps.size - 1) View.GONE else View.VISIBLE
                     }
                 }
             })

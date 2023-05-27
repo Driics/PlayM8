@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_cog_wheel"
-            android:title="@string/drawerSettings"
-            app:showAsAction="ifRoom"
-            android:checkable="true"/>
-    </group>
+    <item
+        android:id="@+id/main_items"
+        android:title="@string/drawerHeaderMain">
+        <menu>
+            <item
+                android:id="@+id/nav_dashboard"
+                android:checkable="true"
+                android:icon="@drawable/ic_nav_home_24"
+                android:title="@string/drawerDashboard"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/nav_friends"
+                android:checkable="true"
+                android:icon="@drawable/ic_users_24"
+                android:title="@string/drawerFriends"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/nav_notification"
+                android:checkable="true"
+                android:icon="@drawable/ic_bell_24"
+                android:title="@string/drawerNotifications" />
+            <item
+                android:id="@+id/nav_settings"
+                android:checkable="true"
+                android:icon="@drawable/ic_cog_wheel"
+                android:title="@string/drawerSettings"
+                app:showAsAction="ifRoom" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/secondary_item"
+        android:title="@string/drawerHeaderOther">
+        <menu>
+            <item
+                android:id="@+id/nav_profile"
+                android:checkable="true"
+                android:icon="@drawable/ic_user_24"
+                android:title="@string/drawerProfile"
+                app:showAsAction="ifRoom" />
+        </menu>
+    </item>
 </menu>

@@ -98,6 +98,25 @@ public class GameParticles {
             }
         }
 
+        public void onDraw() {
+            Canvas canvas = new Canvas();
+            long time = System.currentTimeMillis();
+
+            for (int i = 0; i < particles.size(); i++) {
+                Particle particle = particles.get(i);
+
+                if (paused) {
+                    particle.draw(canvas, i, pausedTime);
+                } else {
+                    particle.draw(canvas, i, time);
+                }
+
+                if (particle.inProgress >= 1) {
+                    particle.genPosition(time, i, false);
+                }
+            }
+        }
+
         public void recycle() {
             for (Bitmap bitmap : bitmaps.values()) {
                 bitmap.recycle();

@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:backgroundTint="?attr/playm8_background_norm"
-    android:fitsSystemWindows="true"
     app:headerLayout="@layout/account_view"
     app:menu="@menu/activity_main_drawer">
 

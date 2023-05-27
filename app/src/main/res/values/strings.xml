@@ -30,6 +30,13 @@
     <string name="password_error_lowercase">The password must contain at least one lowercase letter</string>
     <string name="password_error_uppercase">The password must contain at least one capital letter</string>
     <string name="password_error_digit">The password must contain at least one digit</string>
+    <string name="drawerFriends">Friends</string>
+    <string name="drawerNotifications">Notifications</string>
+    <string name="drawerProfile">Profile</string>
+    <string name="drawerHeaderMain">Main</string>
+    <string name="drawerHeaderOther">Other</string>
+    <string name="empty_friends_list">You don’t have friends… It’s so sad, dude :(</string>
+    <string name="drawerDashboard">Dashboard</string>
 
 
 </resources>
