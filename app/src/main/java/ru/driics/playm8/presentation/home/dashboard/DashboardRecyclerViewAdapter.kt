@@ -1,13 +1,11 @@
 package ru.driics.playm8.presentation.home.dashboard
 
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import ru.driics.playm8.R
 import ru.driics.playm8.core.utils.AndroidUtils.launchActivity

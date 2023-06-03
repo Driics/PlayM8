@@ -62,5 +62,6 @@
             tools:text="1.0.0" />
     </LinearLayout>
 
+
     <View style="@style/Divider.Small" />
 </LinearLayout>

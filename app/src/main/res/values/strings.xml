@@ -37,6 +37,8 @@
     <string name="drawerHeaderOther">Other</string>
     <string name="empty_friends_list">You don’t have friends… It’s so sad, dude :(</string>
     <string name="drawerDashboard">Dashboard</string>
+    <string name="empty_notifications_list">You don\'t have any notifications</string>
+    <string name="accountFirebaseUID">Firebabse UID:</string>
 
 
 </resources>

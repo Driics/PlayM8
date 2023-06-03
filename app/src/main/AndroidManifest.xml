@@ -54,5 +54,7 @@
             android:parentActivityName=".presentation.home.HomeActivity" />
         <activity android:name=".presentation.home.friends.FriendsActivity"
             android:parentActivityName=".presentation.home.HomeActivity"/>
+        <activity android:name=".presentation.home.notifications.NotificationsActivity"
+            android:parentActivityName=".presentation.home.HomeActivity"/>
     </application>
 </manifest>

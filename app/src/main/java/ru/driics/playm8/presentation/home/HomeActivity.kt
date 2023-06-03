@@ -17,6 +17,7 @@ import ru.driics.playm8.databinding.AccountViewBinding
 import ru.driics.playm8.databinding.ActivityHomeBinding
 import ru.driics.playm8.presentation.home.account.AccountFragment
 import ru.driics.playm8.presentation.home.friends.FriendsActivity
+import ru.driics.playm8.presentation.home.notifications.NotificationsActivity
 import ru.driics.playm8.presentation.onboarding.OnboardingActivity
 import java.util.Locale
 
@@ -100,11 +101,13 @@ class HomeActivity : AppCompatActivity() {
                         return@setNavigationItemSelectedListener true
                     }
 
-                    /*R.id.nav_notification -> {
-                        launchActivity<NotificationActivity>()
+                    R.id.nav_notification -> {
+                        launchActivity<NotificationsActivity>()
                         this@HomeActivity.binding.root.close()
                         return@setNavigationItemSelectedListener true
                     }
+
+                    /*
 
                     R.id.nav_settings -> {
                         launchActivity<SettingsActivity>()
